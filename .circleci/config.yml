@@ -31,6 +31,9 @@ jobs:
       #     POSTGRES_PASSWORD: dev_env_password
     working_directory: ~/go/src/github.com/timtosi/mimick-testing
     environment:
+      GOROOT: ""
+      GOPATH: "${HOME}/"
+      PATH: "${GOPATH}/bin:${PATH}"
       TEST_RESULTS: /tmp/test-results
     steps:
       - checkout
