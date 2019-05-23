@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/timtosi/testo/internal/domain"
+	"github.com/timtosi/mimick-testing/internal/domain"
 )
 
 func TestSQLConn_NewSQLConn(t *testing.T) {

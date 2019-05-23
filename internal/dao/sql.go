@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/jinzhu/gorm"
-	"github.com/timtosi/testo/internal/domain"
+	"github.com/timtosi/mimick-testing/internal/domain"
 
 	_ "github.com/jinzhu/gorm/dialects/postgres" // postgres database driver
 )
