@@ -41,7 +41,7 @@ jobs:
           name: Initialize working environement
           command: |
             mkdir -p $TEST_RESULTS
-            mkdir -p /usr/local/go_workspace/bin
+            # mkdir -p /usr/local/go_workspace/bin
       - run:
           name: Install dependencies
           command: |
