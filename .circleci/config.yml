@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.9
-    working_directory: /go/src/github.com/timtosi/mimick-testing
+    working_directory: ~/go/src/github.com/timtosi/mimick-testing
     steps:
       - checkout
       - run:
@@ -29,7 +29,7 @@ jobs:
       #     POSTGRES_USER: dev_env_user
       #     POSTGRES_DB: test_db
       #     POSTGRES_PASSWORD: dev_env_password
-    working_directory: /go/src/github.com/timtosi/mimick-testing
+    working_directory: ~/go/src/github.com/timtosi/mimick-testing
     environment:
       TEST_RESULTS: /tmp/test-results
     steps:
@@ -38,7 +38,7 @@ jobs:
           name: Initialize working environement
           command: |
             mkdir -p $TEST_RESULTS
-            mkdir -p /go/src/github.com/timtosi/${CIRCLE_PROJECT_REPONAME}
+            # mkdir -p /go/src/github.com/timtosi/${CIRCLE_PROJECT_REPONAME}
       - run:
           name: Install dependencies
           command: |
