@@ -33,7 +33,7 @@ jobs:
     environment:
       GOROOT: ""
       GOPATH: "${HOME}/"
-      PATH: "${GOPATH}/bin:${PATH}"
+      PATH: "${GOPATH}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       TEST_RESULTS: /tmp/test-results
     steps:
       - checkout
