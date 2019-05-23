@@ -23,12 +23,12 @@ jobs:
   run-test:
     # machine: true
     docker:
-      # - image: circleci/golang:1.9
-      - image: postgres:11.3
-        environment:
-          POSTGRES_USER: dev_env_user
-          POSTGRES_DB: test_db
-          POSTGRES_PASSWORD: dev_env_password
+      - image: circleci/golang:1.9
+      # - image: postgres:11.3
+      #   environment:
+      #     POSTGRES_USER: dev_env_user
+      #     POSTGRES_DB: test_db
+      #     POSTGRES_PASSWORD: dev_env_password
     working_directory: /go/src/github.com/timtosi/mimick-testing
     environment:
       # GOROOT: ""
