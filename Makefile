@@ -5,7 +5,6 @@
 .PHONY: install
 install:
 		curl https://glide.sh/get | sh
-		gometalinter --install
 		glide install
 
 # Sets up development environment requirements through Docker Compose.
