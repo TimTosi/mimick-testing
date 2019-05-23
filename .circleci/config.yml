@@ -59,13 +59,13 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 
-  deploy:
-    machine: true
-  steps:
-      - checkout
-      - run:
-          name: Deploy
-          command: echo 'Fake deploy'
+  # deploy:
+  #   machine: true
+  # steps:
+  #     - checkout
+  #     - run:
+  #         name: Deploy
+  #         command: echo 'Fake deploy'
 
 workflows:
   version: 2
@@ -73,12 +73,12 @@ workflows:
     jobs:
       - run-test
       - build
-      - deploy:
-          requires:
-            - run-test
-            - build
-          filters:
-            branches:
-              only:
-                - master
-                - production
+      # - deploy:
+      #     requires:
+      #       - run-test
+      #       - build
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      #           - production
