@@ -15,7 +15,7 @@ func TestSQLConn_NewSQLConn(t *testing.T) {
 		mockDBURL         string
 		expectedErrorFunc func(assert.TestingT, interface{}, ...interface{}) bool
 	}{
-		{"ok", "postgres://dev_env_user:dev_env_password@localhost:5432/my_db?sslmode=disable", assert.Nil},
+		{"ok", "postgres://dev_env_user:dev_env_password@localhost:5432/test_db?sslmode=disable", assert.Nil},
 		{"bad_URL", "rgergerhg", assert.NotNil},
 		{"no_remote_db", "postgres://hey:ho@lets.amazonaws.com:5432/go", assert.NotNil},
 	}
