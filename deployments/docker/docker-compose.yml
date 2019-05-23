@@ -1,0 +1,19 @@
+version: '3.7'
+
+
+services:
+    # rabbitmq:
+    #     image: rabbitmq:3.7.14 # rabbitmq@sha256:fc8266b82124727e3bc68f4c6afddead086f163c945bee2a466f4ac2f661fa51
+    #     init: true
+    #     ports:
+    #         - "5672:5672"
+
+    postgres-database:
+        image: postgres:11.3 # Todo
+        init: true
+        environment:
+            - POSTGRES_USER=${PG_USER}
+            - POSTGRES_PASSWORD=${PG_PASSWORD}
+            - POSTGRES_DB=${PG_DB_NAME}
+        ports:
+            - "5432:5432"

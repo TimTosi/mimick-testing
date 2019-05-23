@@ -1,0 +1,84 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.9
+    working_directory: /go/src/github.com/timtosi/mimick-testing
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: make install
+      - run:
+          name: Build binary
+          command: |
+            cd ./cmd
+            go build -o ${CIRCLE_PROJECT_REPONAME}
+            ls -la
+      - persist_to_workspace:
+          root: cmd
+          paths:
+            - mimick-testing
+
+  run-test:
+    docker:
+      - image: circleci/golang:1.9
+      - image: postgres:11.3
+        environment:
+          POSTGRES_USER: dev_env_user
+          POSTGRES_DB: test-db
+          POSTGRES_PASSWORD: dev_env_password
+    working_directory: /go/src/github.com/timtosi/mimick-testing
+    environment:
+      TEST_RESULTS: /tmp/test-results
+    steps:
+      - checkout
+      - run: mkdir -p $TEST_RESULTS
+      - run: go get github.com/jstemmer/go-junit-report
+      - run:
+            name: Waiting for Postgres to be ready
+            command: |
+                for i in `seq 1 20`;
+                do
+                    nc -z localhost 5432 && echo Success && exit 0
+                    echo -n .
+                    sleep 1
+                done
+                echo Failed waiting for Postgres && exit 1
+      - run:
+          name: Install dependencies
+          command: make install
+      - run:
+          name: Run unit tests
+          command: |
+              trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
+              make test | tee ${TEST_RESULTS}/go-test.out
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: raw-test-output
+      - store_test_results:
+          path: /tmp/test-results
+
+deploy:
+    machine: true
+steps:
+      - checkout
+      - run:
+          name: Deploy
+          command: echo 'Fake deploy'
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - run-test
+      - build
+      - deploy:
+          requires:
+            - run-test
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - production
