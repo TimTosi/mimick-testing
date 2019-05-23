@@ -21,13 +21,14 @@ jobs:
             - mimick-testing
 
   run-test:
-    docker:
-      - image: circleci/golang:1.9
-      - image: postgres:11.3
-        environment:
-          POSTGRES_USER: dev_env_user
-          POSTGRES_DB: test_db
-          POSTGRES_PASSWORD: dev_env_password
+    machine: true
+    # docker:
+      # - image: circleci/golang:1.9
+      # - image: postgres:11.3
+      #   environment:
+      #     POSTGRES_USER: dev_env_user
+      #     POSTGRES_DB: test_db
+      #     POSTGRES_PASSWORD: dev_env_password
     working_directory: /go/src/github.com/timtosi/mimick-testing
     environment:
       TEST_RESULTS: /tmp/test-results
@@ -35,19 +36,20 @@ jobs:
       - checkout
       - run: mkdir -p $TEST_RESULTS
       - run: go get github.com/jstemmer/go-junit-report
-      - run:
-            name: Waiting for Postgres to be ready
-            command: |
-                for i in `seq 1 20`;
-                do
-                    nc -z localhost 5432 && echo Success && exit 0
-                    echo -n .
-                    sleep 1
-                done
-                echo Failed waiting for Postgres && exit 1
+      # - run:
+      #       name: Waiting for Postgres to be ready
+      #       command: |
+      #           for i in `seq 1 20`;
+      #           do
+      #               nc -z localhost 5432 && echo Success && exit 0
+      #               echo -n .
+      #               sleep 1
+      #           done
+      #           echo Failed waiting for Postgres && exit 1
       - run:
           name: Install dependencies
           command: make install
+      - run: make infra      
       - run:
           name: Run unit tests
           command: |
