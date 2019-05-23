@@ -15,7 +15,12 @@ infra:
 		./deployments/docker/wait-docker.sh
 
 # Runs test suite with all development environment requirements.
-.PHONY: test
-test: infra
+.PHONY: integration-test
+integration-test: infra
 		-go test -v -race -cover -timeout=120s $$(glide novendor)
 		docker-compose -f deployments/docker/docker-compose.yml down
+
+# Runs test suite.
+.PHONY: test
+test: 
+		go test -v -race -cover -timeout=120s $$(glide novendor)
