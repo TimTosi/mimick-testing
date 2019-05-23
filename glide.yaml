@@ -1,0 +1,14 @@
+package: github.com/timtosi/mimick-testing
+import:
+- package: github.com/jinzhu/gorm
+  version: ^1.9.8
+  subpackages:
+  - dialects/postgres
+- package: github.com/smotes/purse
+  version: ^1.0.1
+testImport:
+- package: github.com/stretchr/testify
+  version: ^1.3.0
+  subpackages:
+  - assert
+  - require

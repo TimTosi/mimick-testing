@@ -1,0 +1,31 @@
+hash: 56ad2ca07706fc5eb07eb4603b06609551a7db6542ec07d6c2fe01a06bc95e66
+updated: 2019-05-23T17:21:54.833488672+01:00
+imports:
+- name: github.com/jinzhu/gorm
+  version: b7156195f7f3415f97c20abbd6aff894b847fee8
+  subpackages:
+  - dialects/postgres
+- name: github.com/jinzhu/inflection
+  version: 04140366298a54a039076d798123ffa108fff46c
+- name: github.com/lib/pq
+  version: 2ff3cb3adc01768e0a552b3a02575a6df38a9bea
+  subpackages:
+  - hstore
+  - oid
+  - scram
+- name: github.com/smotes/purse
+  version: 9ce9ed34191cbabb61a4dd1d5623e69a3b95cdda
+testImports:
+- name: github.com/davecgh/go-spew
+  version: d8f796af33cc11cb798c1aaeb27a4ebc5099927d
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: 5d4384ee4fb2527b0a1256a821ebfc92f91efefc
+  subpackages:
+  - difflib
+- name: github.com/stretchr/testify
+  version: ffdc059bfe9ce6a4e144ba849dbedead332c6053
+  subpackages:
+  - assert
+  - require
