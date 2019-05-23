@@ -59,9 +59,9 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 
-deploy:
+  deploy:
     machine: true
-steps:
+  steps:
       - checkout
       - run:
           name: Deploy
