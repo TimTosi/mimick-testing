@@ -21,19 +21,19 @@ jobs:
             - mimick-testing
 
   run-test:
-    machine: true
-    # docker:
+    # machine: true
+    docker:
       # - image: circleci/golang:1.9
-      # - image: postgres:11.3
-      #   environment:
-      #     POSTGRES_USER: dev_env_user
-      #     POSTGRES_DB: test_db
-      #     POSTGRES_PASSWORD: dev_env_password
+      - image: postgres:11.3
+        environment:
+          POSTGRES_USER: dev_env_user
+          POSTGRES_DB: test_db
+          POSTGRES_PASSWORD: dev_env_password
     working_directory: ~/go/src/github.com/timtosi/mimick-testing
     environment:
-      GOROOT: ""
-      GOPATH: "${HOME}/"
-      PATH: "${GOPATH}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      # GOROOT: ""
+      # GOPATH: "${HOME}/"
+      # PATH: "${GOPATH}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       TEST_RESULTS: /tmp/test-results
     steps:
       - checkout
@@ -47,6 +47,13 @@ jobs:
           command: |
             make install
             go get github.com/jstemmer/go-junit-report
+
+      - run:
+          name: Install docker tools
+          command: |
+            make install
+            go get github.com/jstemmer/go-junit-report
+
       - run:
           name: Set up infrastructure.
           command: make infra
